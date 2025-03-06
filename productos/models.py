@@ -17,3 +17,15 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class Carrito(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    productos = models.ManyToManyField(Producto, through='CarritoProducto')
+    
+    def __str__(self):
+        return f"Carrito de {self.user.username}"
+    
+class CarritoProducto(models.Model):
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)

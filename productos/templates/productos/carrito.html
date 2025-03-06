@@ -1,0 +1,27 @@
+<h2>Mi Carrito</h2>
+{% if productos_carrito %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in productos_carrito %}
+            <tr>
+                <td>{{ item.producto.nombre }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>${{ item.producto.precio * item.cantidad }}</td>
+                <td>
+                    <a href="{% url 'eliminar_del_carrito' item.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Total: ${{ total }}</h3>
+{% else %}
+    <p>Tu carrito está vacío.</p>
+{% endif %}
