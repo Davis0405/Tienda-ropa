@@ -1,6 +1,7 @@
 from django import forms
-from .models import Producto, Categoria
+from .models import Producto, Categoria, Perfil
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm
 
 class ProductoForm(forms.ModelForm):
     class Meta:
@@ -24,3 +25,14 @@ class RegistroForm(forms.ModelForm):
         if password and password2 and password != password2:
             raise forms.ValidationError("Las contraseñas no coinciden")
         return password2
+
+#formulario para editar perfil 
+class PerfilForm(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = ['telefono', 'direccion']
+
+class UserForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ['email']

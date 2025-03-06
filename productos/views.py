@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Producto, Categoria, Carrito, CarritoProducto
-from .forms import ProductoForm, RegistroForm
+from .forms import ProductoForm, RegistroForm, PerfilForm, UserForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 
@@ -88,3 +88,35 @@ def eliminar_del_carrito(request, producto_id):
 
     # Redirige a la página del carrito o a donde desees
     return redirect('mi_carrito')
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Perfil
+from .forms import PerfilForm
+
+@login_required
+def perfil(request):
+    try:
+        perfil = Perfil.objects.get(usuario=request.user)
+    except Perfil.DoesNotExist:
+        perfil = None
+    
+    if request.method == 'POST':
+        if perfil:
+            form = PerfilForm(request.POST, instance=perfil)
+        else:
+            form = PerfilForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('perfil')  # Redirige al perfil actualizado
+
+    else:
+        if perfil:
+            form = PerfilForm(instance=perfil)
+        else:
+            form = PerfilForm()
+    
+    return render(request, 'productos/perfil.html', {'form': form})
+

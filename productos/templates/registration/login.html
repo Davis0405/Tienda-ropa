@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #121212; /* Fondo oscuro */
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .registro-container {
+            max-width: 400px;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            margin: 50px auto;
+        }
+
+        .registro-container h2 {
+            color: #ff6f61; /* Color llamativo para el título */
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            background: #2c2c2c;
+            border: none;
+            color: white; /* Texto en blanco */
+            border-radius: 8px;
+            padding: 10px;
+            width: 100%; /* Asegura que el campo ocupe todo el ancho */
+        }
+
+        .form-control:focus {
+            background: #2c2c2c;
+            box-shadow: 0 0 5px #ff6f61;
+            border: 1px solid #ff6f61;
+            color: white; /* Asegura que el texto sea blanco al enfocar */
+        }
+
+        .form-control::placeholder {
+            color: #aaaaaa; /* Color del texto del placeholder */
+        }
+
+        .btn-registrarse {
+            background-color: #ff6f61;
+            border: none;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-registrarse:hover {
+            background-color: #e65c50;
+        }
+
+        .text-link {
+            color: #ff6f61;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .text-link:hover {
+            color: #e65c50;
+            text-decoration: underline;
+        }
+
+        .show-password {
+            cursor: pointer;
+        }
+
+        .registro-container {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .btn-registrarse {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .input-group-text {
+            background-color: #2c2c2c;
+            border: none;
+            cursor: pointer;
+            color: #ff6f61;
+            height: 100%; /* Asegura que el icono tenga la misma altura que el campo */
+            width: 40px; /* Ajusta el ancho del icono */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Tienda de Ropa</a>
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link d-lg-inline-block d-block text-center" href="{% url 'pagina_principal' %}">
+                            <i class="fas fa-home"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-lg-inline-block d-block text-center" href="{% url 'registro' %}">
+                            <i class="fas fa-user-plus"></i> Registrarse
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="registro-container">
+        <h2>Iniciar sesión</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="id_username" name="username" placeholder="Usuario" required>
+            </div>
+
+            <!-- Campo para la contraseña con botón de ver / ocultar -->
+            <div class="mb-3">
+                <label for="id_password" class="form-label">Contraseña</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="id_password" name="password" placeholder="Contraseña" required>
+                    <span class="input-group-text" id="toggle-password">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-registrarse">Iniciar sesión</button>
+        </form>
+        <div class="text-center mt-3">
+            <p>¿No tienes cuenta? <a href="{% url 'registro' %}" class="text-link">Regístrate aquí</a></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Script para alternar la visibilidad de la contraseña
+        const togglePassword = document.querySelector('#toggle-password');
+        const passwordField = document.querySelector('#id_password');
+
+        togglePassword.addEventListener('click', function (e) {
+            // Alternar entre mostrar y ocultar la contraseña
+            const type = passwordField.type === 'password' ? 'text' : 'password';
+            passwordField.type = type;
+            this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+    </script>
+</body>
+</html>
