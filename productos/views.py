@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Producto, Categoria, Carrito, CarritoProducto
 from .forms import ProductoForm, RegistroForm
 from django.contrib.auth import login
@@ -65,24 +65,26 @@ def agregar_al_carrito(request, producto_id):
 
     return redirect('mi_carrito')  # Redirige a la página del carrito
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-@login_required
-def mi_carrito(request):
-    carrito = Carrito.objects.get(user=request.user)
-    productos_carrito = CarritoProducto.objects.filter(carrito=carrito)
-    
-    return render(request, 'carrito.html', {'productos_carrito': productos_carrito})
 
 @login_required
 def mi_carrito(request):
     carrito = Carrito.objects.get(user=request.user)
     productos_carrito = CarritoProducto.objects.filter(carrito=carrito)
-    total = sum(item.producto.precio * item.cantidad for item in productos_carrito)
     
-    return render(request, 'carrito.html', {'productos_carrito': productos_carrito, 'total': total})
+    # Calcula el total
+    total = 0
+    for item in productos_carrito:
+        total += item.producto.precio * item.cantidad
+    
+    return render(request, 'productos/carrito.html', {'productos_carrito': productos_carrito, 'total': total})
 
 @login_required
-def eliminar_del_carrito(request, carrito_producto_id):
-    carrito_producto = CarritoProducto.objects.get(id=carrito_producto_id)
+def eliminar_del_carrito(request, producto_id):
+    # Obtén el objeto relacionado con el producto
+    carrito_producto = get_object_or_404(CarritoProducto, id=producto_id)
+    
+    # Elimina el producto del carrito
     carrito_producto.delete()
-    
+
+    # Redirige a la página del carrito o a donde desees
     return redirect('mi_carrito')
