@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Producto, Categoria
+from .forms import ProductoForm
 
 def lista_productos(request):
     # Obtener todas las categorías
@@ -18,12 +19,7 @@ def lista_productos(request):
         'categorias': categorias,
         'selected_categoria': categoria_id
     })
-
-
-from django.shortcuts import render, redirect
-from .forms import ProductoForm
-from .models import Categoria
-
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 def agregar_producto(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST, request.FILES)
@@ -33,4 +29,7 @@ def agregar_producto(request):
     else:
         form = ProductoForm()
     return render(request, 'productos/agregar_producto.html', {'form': form})
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
+def pagina_principal(request):
+    return render(request, 'productos/index.html')

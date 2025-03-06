@@ -1,0 +1,64 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #343a40; /* Fondo oscuro */
+    color: #f8f9fa; /* Texto claro */
+}
+
+.navbar {
+    background-color: #212529; /* Fondo oscuro de la barra de navegación */
+}
+
+.nav-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #f8f9fa; /* Color del texto de los enlaces */
+}
+
+.nav-link:hover {
+    color: #ffc107; /* Color del texto al pasar el mouse */
+}
+
+.hero {
+    background: url('https://source.unsplash.com/1600x600/?fashion,clothing') center/cover;
+    height: 60vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
+}
+
+.category-card {
+    transition: transform 0.3s ease;
+    background-color: #495057; /* Fondo de las tarjetas */
+    border: none; /* Sin borde */
+    color: #f8f9fa; /* Color del texto en las tarjetas */
+}
+
+.category-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Sombra al pasar el mouse */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Color del botón */
+    border: none; /* Sin borde */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Color del botón al pasar el mouse */
+}
+
+footer {
+    background-color: #212529; /* Fondo oscuro del pie de página */
+    color: #f8f9fa; /* Color del texto del pie de página */
+}
+
+.icon-right {
+    margin-left: 8px; /* Espacio entre el texto y el icono */
+    color: #ff5733; /* Cambia este color según tu preferencia */
+}
