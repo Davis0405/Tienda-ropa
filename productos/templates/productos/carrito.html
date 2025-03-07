@@ -1,4 +1,3 @@
-<!-- carrito.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -27,7 +26,7 @@
                     <tr>
                         <td>{{ item.producto.nombre }}</td>
                         <td>{{ item.cantidad }}</td>
-                        <td>${{ item.producto.precio }}</td>
+                        <td>Q{{ item.producto.precio }}</td>
                         <td>
                             <a href="{% url 'eliminar_del_carrito' producto_id=item.id %}" class="btn btn-danger">
                                 Eliminar
@@ -39,7 +38,7 @@
             </table>
 
             <div class="total-section">
-                <h3>Total: ${{ total }}</h3>
+                <h3>Total: Q {{ total }}</h3>
                 <a href="#" class="btn btn-primary">Finalizar Compra</a>
             </div>
         {% else %}
