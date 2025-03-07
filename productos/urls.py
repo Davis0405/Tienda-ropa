@@ -15,4 +15,7 @@ urlpatterns = [
     path('eliminar/<int:producto_id>/', views.eliminar_del_carrito, name='eliminar_del_carrito'),
     path('perfil/', views.perfil, name='perfil'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
+    path('perfil/agregar_direccion/', views.agregar_direccion, name='agregar_direccion'),
 ]
+

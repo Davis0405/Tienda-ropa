@@ -1,0 +1,81 @@
+body {
+    background-color: #121212; /* Fondo oscuro */
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.registro-container {
+    max-width: 400px;
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.registro-container h2 {
+    color: #ff6f61; /* Color llamativo para el título */
+    margin-bottom: 20px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.form-control {
+    background: #2c2c2c;
+    border: none;
+    color: white; /* Texto en blanco */
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%; /* Asegura que el campo ocupe todo el ancho */
+}
+
+.form-control:focus {
+    background: #2c2c2c;
+    box-shadow: 0 0 5px #ff6f61;
+    border: 1px solid #ff6f61;
+    color: white; /* Asegura que el texto sea blanco al enfocar */
+}
+
+.form-control::placeholder {
+    color: #aaaaaa; /* Color del texto del placeholder */
+}
+
+.btn-registrarse {
+    background-color: #ff6f61;
+    border: none;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btn-registrarse:hover {
+    background-color: #e65c50;
+}
+
+.text-link {
+    color: #ff6f61;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.text-link:hover {
+    color: #e65c50;
+    text-decoration: underline;
+}
+
+.show-password {
+    cursor: pointer;
+}
+.registro-container {
+    max-width: 400px;
+    width: 100%;
+}
+.btn-registrarse {
+    width: 100%;
+    margin-top: 15px;
+}

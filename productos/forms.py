@@ -36,3 +36,24 @@ class UserForm(UserChangeForm):
     class Meta:
         model = User
         fields = ['email']
+
+
+# Formulario para editar el perfil
+class PerfilForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+        }
+
+# Formulario para agregar dirección
+class DireccionForm(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = ['direccion']
+        widgets = {
+            'direccion': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
+        }
+

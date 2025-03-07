@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, Categoria, Carrito, CarritoProducto
-from .forms import ProductoForm, RegistroForm, PerfilForm, UserForm
+from .models import Producto, Categoria, Carrito, CarritoProducto, Perfil
+from .forms import ProductoForm, RegistroForm, PerfilForm, UserForm, PerfilForm, DireccionForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 
@@ -90,11 +90,6 @@ def eliminar_del_carrito(request, producto_id):
     return redirect('mi_carrito')
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Perfil
-from .forms import PerfilForm
-
 @login_required
 def perfil(request):
     try:
@@ -120,3 +115,31 @@ def perfil(request):
     
     return render(request, 'productos/perfil.html', {'form': form})
 
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+@login_required
+def editar_perfil(request):
+    if request.method == "POST":
+        form = PerfilForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('perfil')  # Redirigir al perfil después de editar
+    else:
+        form = PerfilForm(instance=request.user)
+
+    return render(request, 'productos/editar_perfil.html', {'form': form})
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+@login_required
+def agregar_direccion(request):
+    perfil, created = Perfil.objects.get_or_create(usuario=request.user)
+
+    if request.method == "POST":
+        form = DireccionForm(request.POST, instance=perfil)
+        if form.is_valid():
+            form.save()
+            return redirect('perfil')
+
+    else:
+        form = DireccionForm(instance=perfil)
+
+    return render(request, 'productos/agregar_direccion.html', {'form': form})

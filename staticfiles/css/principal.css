@@ -1,0 +1,107 @@
+/* Estilo global */
+body {
+    background-color: #121212; /* Fondo más oscuro */
+    color: #ffffff; /* Texto claro */
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Barra de navegación */
+.navbar {
+    background-color: #1e1e1e; /* Fondo oscuro navbar */
+}
+
+.navbar-brand {
+    color: #ff6f61 !important; /* Color llamativo para la marca */
+    font-weight: bold;
+}
+
+.nav-link {
+    color: #ffffff; /* Enlaces en blanco */
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ff6f61; /* Cambio de color al pasar el mouse */
+}
+
+/* Sección Hero */
+.hero {
+    background: url('https://source.unsplash.com/1600x600/?fashion,clothing') center/cover;
+    height: 60vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.6); /* Capa de fondo con transparencia */
+}
+
+/* Tarjetas de categorías */
+.category-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #1e1e1e; /* Fondo oscuro */
+    border: none; /* Sin bordes */
+    color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.category-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(255, 100, 100, 0.4); /* Sombra más llamativa */
+}
+
+/* Botones */
+.btn-primary {
+    background-color: #ff6f61; /* Color llamativo */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #e65c50; /* Cambio de color en hover */
+}
+
+/* Formulario */
+.registro-container {
+    max-width: 400px;
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.form-control {
+    background: #2c2c2c;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+}
+
+.form-control:focus {
+    background: #2c2c2c;
+    box-shadow: 0 0 5px #ff6f61;
+    border: 1px solid #ff6f61;
+}
+
+/* Pie de página */
+footer {
+    background-color: #1e1e1e;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Íconos */
+.icon-right {
+    margin-left: 8px;
+    color: #ff6f61;
+}
