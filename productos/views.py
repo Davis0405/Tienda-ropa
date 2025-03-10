@@ -3,6 +3,7 @@ from .models import Producto, Categoria, Carrito, CarritoProducto, Perfil
 from .forms import ProductoForm, RegistroForm, PerfilForm, UserForm, PerfilForm, DireccionForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 
 def lista_productos(request):
@@ -143,3 +144,16 @@ def agregar_direccion(request):
         form = DireccionForm(instance=perfil)
 
     return render(request, 'productos/agregar_direccion.html', {'form': form})
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+#vista para el modal de list_productos
+def obtener_detalle_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    data = {
+        "nombre": producto.nombre,
+        "descripcion": producto.descripcion,
+        "precio": producto.precio,
+        "imagen": producto.imagen.url,
+        "categoria": producto.categoria.nombre
+    }
+    return JsonResponse(data)

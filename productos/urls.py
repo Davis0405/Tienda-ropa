@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import pagina_principal, registro
+from .views import pagina_principal, registro, obtener_detalle_producto
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 
@@ -17,5 +17,6 @@ urlpatterns = [
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
     path('perfil/agregar_direccion/', views.agregar_direccion, name='agregar_direccion'),
+    path('producto/detalle/<int:producto_id>/', obtener_detalle_producto, name='obtener_detalle_producto'),
 ]
 

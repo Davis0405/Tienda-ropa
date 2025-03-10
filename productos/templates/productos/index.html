@@ -22,11 +22,11 @@
         <!-- Contenedor del menú -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link d-lg-inline-block d-block text-center" href="{% url 'pagina_principal' %}">
                         <i class="fas fa-home"></i> Inicio
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link d-lg-inline-block d-block text-center" href="{% url 'lista_productos' %}">
                         <i class="fas fa-list"></i> Categorías
@@ -104,7 +104,7 @@
                 </div>
                 <div class="col-md-4 mt-4">
                     <div class="card category-card">
-                        <img src="https://source.unsplash.com/400x300/?accessories" class="card-img-top" alt="Accesorios">
+                        <img src="{% static '/imagenes/accesorios.jpg' %}" class="card-img-top" alt="Accesorios">
                         <div class="card-body">
                             <h5 class="card-title">Accesorios</h5>
                             <a href="#" class="btn btn-primary">Ver más</a>

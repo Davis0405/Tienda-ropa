@@ -3,6 +3,7 @@ body {
     background-color: #121212; /* Fondo más oscuro */
     color: #ffffff; /* Texto claro */
     font-family: 'Poppins', sans-serif;
+    margin: 0; /* Eliminar márgenes por defecto */
 }
 
 /* Barra de navegación */
@@ -46,6 +47,7 @@ body {
     color: #f8f9fa;
     padding: 15px;
     border-radius: 10px;
+    margin-bottom: 20px; /* Espacio entre tarjetas */
 }
 
 .category-card:hover {
@@ -104,4 +106,19 @@ footer {
 .icon-right {
     margin-left: 8px;
     color: #ff6f61;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .hero {
+        font-size: 1.5rem; /* Tamaño de fuente más pequeño en móviles */
+    }
+
+    .category-card {
+        padding: 10px; /* Menos padding en móviles */
+    }
+
+    .btn-primary {
+        padding: 8px 16px; /* Botones más pequeños en móviles */
+    }
 }
