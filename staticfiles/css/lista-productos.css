@@ -1,0 +1,82 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212; /* Fondo oscuro */
+    color: #ffffff; /* Texto blanco */
+}
+
+h1 {
+    text-align: center;
+    margin: 40px 0;
+    color: #ff6f61; /* Color del título */
+}
+
+.productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.producto {
+    background-color: #1e1e1e; /* Fondo de cada producto */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+    margin: 15px;
+    padding: 20px;
+    text-align: center;
+    width: 300px; /* Ancho fijo para los productos */
+}
+
+.producto img {
+    max-width: 100%; /* Imagen responsiva */
+    border-radius: 10px; /* Bordes redondeados para la imagen */
+    height: auto; /* Mantener la proporción de la imagen */
+}
+
+.producto h2 {
+    color: #ff6f61; /* Color del nombre del producto */
+    margin: 10px 0;
+}
+
+.producto p {
+    color: #aaaaaa; /* Color del texto de descripción y precio */
+}
+
+.producto .precio {
+    font-weight: bold; /* Precio en negrita */
+    color: #ffffff; /* Color del precio */
+}
+
+/* Estilo del formulario de filtro */
+.filtro-categoria {
+    margin-bottom: 20px;
+    background-color: #1e1e1e;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.filtro-categoria label {
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+.filtro-categoria select {
+    background-color: #333;
+    color: #ffffff;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.filtro-categoria button {
+    background-color: #ff6f61;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filtro-categoria button:hover {
+    background-color: #e94f47;
+}

@@ -47,17 +47,20 @@
                 <h4>Información Personal</h4>
                 <p><strong>Usuario:</strong> {{ user.username }}</p>
                 <p><strong>Correo:</strong> {{ user.email }}</p>
-                <a href="#" class="btn btn-primary">Editar Perfil</a>
+                <a href="{% url 'editar_perfil' %}" class="btn btn-primary">Editar Perfil</a>
             </div>
 
             <!-- Bloque 2: Dirección -->
             <div class="perfil-card">
                 <h4>Dirección</h4>
-                {% if user.profile.direccion %}
-                    <p><strong>Dirección:</strong> {{ user.profile.direccion }}</p>
+                {% if user.perfil.direccion %}
+                    <p><strong>Dirección:</strong> {{ user.perfil.direccion }}</p>
+                    <p>¿Quieres agregar otra dirección o eliminar la actual?</p>
+                    <a href="{% url 'agregar_direccion' %}" class="btn btn-primary">Agregar otra dirección</a>
+                    <a href="#" class="btn btn-danger">Eliminar dirección</a>
                 {% else %}
                     <p>No tienes una dirección registrada.</p>
-                    <a href="#" class="btn btn-success">Agregar Dirección</a>
+                    <a href="{% url 'agregar_direccion' %}" class="btn-agregar-bg-secondary">Agregar Dirección</a>
                 {% endif %}
             </div>
 
