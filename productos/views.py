@@ -157,3 +157,45 @@ def obtener_detalle_producto(request, producto_id):
         "categoria": producto.categoria.nombre
     }
     return JsonResponse(data)
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+#vista para contactar
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.contrib import messages
+from .models import MensajeContacto  # Asegúrate de crear este modelo
+from django.conf import settings
+
+# productos/views.py
+
+from django.shortcuts import render, redirect
+from .forms import MensajeContacto
+
+# productos/views.py
+
+from django.shortcuts import render, redirect
+from .forms import MensajeContactoForm
+from .models import MensajeContacto
+
+def contacto(request):
+    informacion_contacto = {
+        'correo': 'contacto@tiendaropa.com',
+        'telefono': '+502 1234 5678',
+        'facebook': 'https://facebook.com/tiendaropa',
+        'instagram': 'https://instagram.com/tiendaropa',
+        'direccion': '123 Calle Principal, Ciudad, País',
+    }
+
+    if request.method == 'POST':
+        form = MensajeContactoForm(request.POST)
+        if form.is_valid():
+            # Guarda el mensaje en la base de datos
+            form.save()
+            return redirect('contacto')  # Redirige a la misma página después de enviar el mensaje
+    else:
+        form = MensajeContactoForm()
+
+    return render(request, 'productos/contacto.html', {
+        'contacto': informacion_contacto,
+        'form': form,
+    })

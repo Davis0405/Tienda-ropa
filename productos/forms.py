@@ -1,5 +1,5 @@
 from django import forms
-from .models import Producto, Categoria, Perfil
+from .models import Producto, Categoria, Perfil , MensajeContacto
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 
@@ -57,3 +57,10 @@ class DireccionForm(forms.ModelForm):
             'direccion': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
         }
 
+#formulario para enviar mensaje de contacto
+# productos/forms.py
+
+class MensajeContactoForm(forms.ModelForm):
+    class Meta:
+        model = MensajeContacto
+        fields = ['nombre', 'email', 'mensaje']
