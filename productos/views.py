@@ -72,10 +72,8 @@ def mi_carrito(request):
     carrito = Carrito.objects.get(user=request.user)
     productos_carrito = CarritoProducto.objects.filter(carrito=carrito)
     
-    # Calcula el total
-    total = 0
-    for item in productos_carrito:
-        total += item.producto.precio * item.cantidad
+    # El total ahora se obtiene del campo `total` del carrito
+    total = carrito.total
     
     return render(request, 'productos/carrito.html', {'productos_carrito': productos_carrito, 'total': total})
 

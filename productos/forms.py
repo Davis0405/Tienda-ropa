@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserChangeForm
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = ['nombre', 'descripcion', 'precio', 'imagen', 'categoria']
+        fields = ['nombre', 'descripcion', 'precio', 'imagen', 'categoria', 'stock', 'sku', 'talla', 'colores', 'descuento', 'estado']
 
     categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(), empty_label="Seleccione una categoría")
 
