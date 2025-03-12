@@ -42,7 +42,8 @@ class Carrito(models.Model):
     fecha_creacion = models.DateTimeField(default=timezone.now)  # Valor predeterminado
     estado = models.CharField(max_length=50, choices=[('activo', 'Activo'), ('completado', 'Completado'), ('cancelado', 'Cancelado')], default='activo')
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  # Nuevo campo
-
+    confirmado = models.BooleanField(default=False)  # Nuevo campo
+    
     def actualizar_total(self):
         total = sum(item.producto.precio * item.cantidad for item in self.carritoproducto_set.all())
         self.total = total

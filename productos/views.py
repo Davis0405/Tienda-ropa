@@ -3,8 +3,9 @@ from .models import Producto, Categoria, Carrito, CarritoProducto, Perfil
 from .forms import ProductoForm, RegistroForm, PerfilForm, UserForm, PerfilForm, DireccionForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-
+from django.http import JsonResponse, HttpResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 
 def lista_productos(request):
     # Obtener todas las categorías
@@ -24,6 +25,7 @@ def lista_productos(request):
         'selected_categoria': categoria_id
     })
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
 def agregar_producto(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST, request.FILES)
@@ -53,6 +55,7 @@ def registro(request):
     return render(request, 'productos/registro.html', {'form': form})
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 #logica de carrito
+
 @login_required
 def agregar_al_carrito(request, producto_id):
     producto = Producto.objects.get(id=producto_id)
@@ -75,7 +78,53 @@ def mi_carrito(request):
     # El total ahora se obtiene del campo `total` del carrito
     total = carrito.total
     
-    return render(request, 'productos/carrito.html', {'productos_carrito': productos_carrito, 'total': total})
+    return render(request, 'productos/carrito.html', {'carrito': carrito, 'productos_carrito': productos_carrito, 'total': total})
+
+#logica para agregar productos al carrito y que genera la factura (recibo)
+@login_required
+def confirmar_pedido(request, carrito_id):
+    carrito = Carrito.objects.get(id=carrito_id, user=request.user)
+    carrito.estado = 'completado'
+    carrito.confirmado = True
+    carrito.save()
+
+    CarritoProducto.objects.filter(carrito=carrito).delete()
+    return redirect('mi_carrito')  # Redirigir de vuelta al carrito o a una página de confirmación
+
+@login_required
+def confirmacion_pedido(request):
+    carrito = Carrito.objects.get(user=request.user, estado='completado')
+    return render(request, 'productos/confirmacion.html', {'carrito': carrito})
+
+def generar_recibo_pdf(request, carrito_id):
+    carrito = Carrito.objects.get(id=carrito_id, user=request.user)
+    if not carrito.confirmado:
+        return HttpResponse("El pedido no ha sido confirmado.", status=400)
+
+    productos_carrito = CarritoProducto.objects.filter(carrito=carrito)
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="recibo_{carrito_id}.pdf"'
+
+    p = canvas.Canvas(response, pagesize=letter)
+    width, height = letter
+
+    p.drawString(100, height - 100, f"Recibo para Carrito ID: {carrito_id}")
+    p.drawString(100, height - 120, f"Usuario: {carrito.user.username}")
+    p.drawString(100, height - 140, f"Fecha: {carrito.fecha_creacion.strftime('%Y-%m-%d %H:%M:%S')}")
+
+    y = height - 160
+    for item in productos_carrito:
+        p.drawString(100, y, f"{item.producto.nombre} - {item.cantidad} x {item.producto.precio} = {item.precio_total}")
+        y -= 20
+
+    p.drawString(100, y - 20, f"Total: {carrito.total}")
+
+    p.showPage()
+    p.save()
+    return response
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 @login_required
 def eliminar_del_carrito(request, producto_id):

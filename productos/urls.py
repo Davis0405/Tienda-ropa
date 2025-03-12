@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import pagina_principal, registro, obtener_detalle_producto, MensajeContacto
+from .views import pagina_principal, registro, obtener_detalle_producto, MensajeContacto, confirmar_pedido, generar_recibo_pdf, confirmacion_pedido
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 
@@ -19,5 +19,8 @@ urlpatterns = [
     path('perfil/agregar_direccion/', views.agregar_direccion, name='agregar_direccion'),
     path('producto/detalle/<int:producto_id>/', obtener_detalle_producto, name='obtener_detalle_producto'),
     path('contacto/', views.contacto, name='contacto'),
+    path('confirmar_pedido/<int:carrito_id>/', confirmar_pedido, name='confirmar_pedido'),
+    path('recibo/<int:carrito_id>/', generar_recibo_pdf, name='generar_recibo_pdf'),
+    path('confirmacion/', confirmacion_pedido, name='confirmacion_pedido'),
 ]
 

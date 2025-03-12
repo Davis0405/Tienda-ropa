@@ -63,6 +63,7 @@
                         <td>{{ item.producto.nombre }}</td>
                         <td>{{ item.cantidad }}</td>
                         <td>Q{{ item.producto.precio }}</td>
+                        <td><a href="{% url 'confirmar_pedido' carrito.id %}">Confirmar Pedido</a></td>
                         <td>
                             <a href="{% url 'eliminar_del_carrito' producto_id=item.id %}" class="btn btn-danger">
                                 Eliminar
@@ -75,7 +76,7 @@
 
             <div class="total-section">
                 <h3>Total: Q {{ total }}</h3>
-                <a href="#" class="btn btn-primary">Finalizar Compra</a>
+                <a href="{% url 'confirmar_pedido' carrito.id %}" class="btn btn-primary">Finalizar Compra</a>
             </div>
         {% else %}
             <p class="empty-cart">Tu carrito está vacío.</p>
